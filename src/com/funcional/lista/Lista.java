@@ -36,7 +36,7 @@ public sealed interface Lista<T> permits Nil, Cons {
 		return ret;
 	}
 
-	//
+	// append
 	default Lista<T> append(T elemen) {
 		if (isEmpty()) {
 			return Lista.of(elemen);
@@ -44,10 +44,13 @@ public sealed interface Lista<T> permits Nil, Cons {
 			return Lista.of(head(), tail().append(elemen));
 		}
 	}
+	// append modificado
 
 	default Lista<T> prepend(T elem) {
 		return Lista.of(elem, this);
 	}
+
+	// prepend modificado
 
 	default Lista<T> remove(T elem) {
 		if (isEmpty()) {
@@ -60,6 +63,7 @@ public sealed interface Lista<T> permits Nil, Cons {
 			}
 		}
 	}
+	// remove modificado
 
 	default Lista<T> drop(int n) {
 		// elimina un numero determinado de elemntos drop(2) // elimina dos elementos
@@ -71,6 +75,8 @@ public sealed interface Lista<T> permits Nil, Cons {
 
 	}
 
+	// drop modificado
+
 	default Lista<T> dropWhile(Predicate<T> p) {
 		if (isEmpty() || p.test(head())) {
 			return this;
@@ -78,6 +84,8 @@ public sealed interface Lista<T> permits Nil, Cons {
 			return tail().dropWhile(p);
 		}
 	}
+
+	// dropwhile modificado
 
 	default Lista<T> concat(Lista<T> a) {
 		if (isEmpty()) {
@@ -87,6 +95,8 @@ public sealed interface Lista<T> permits Nil, Cons {
 		}
 	}
 
+	// concat modificado
+
 	default Lista<T> take(int n) {
 		if (isEmpty() || n <= 0) {
 			return NIL;
@@ -95,6 +105,12 @@ public sealed interface Lista<T> permits Nil, Cons {
 		}
 	}
 
+	// take modificado
+
+//	default Lista<T> take1(int n) {
+//
+//	}
+
 	default Lista<T> takeWile(Predicate<T> p) {// revisar Predicate<T>
 		if (isEmpty() || !p.test(head())) {
 			return NIL;
@@ -102,4 +118,24 @@ public sealed interface Lista<T> permits Nil, Cons {
 			return Lista.of(head(), tail().takeWile(p));
 		}
 	}
+	
+	//take while modificado
+
+	
+	
+	//suma
+	
+	static Integer sum(Lista<Integer> list) {
+		if(list.isEmpty()) {
+			return 0;
+		}else if (list.tail().isEmpty()) {
+			return list.head();
+		}else {
+			return list.head()+sum(list.tail());
+		}
+		
+	}
+	
+	//maximo
 }
+
